@@ -1,33 +1,39 @@
-use rand::Rng;
-use std::cmp::Ordering;
-use std::io;
-
 fn main() {
-    let secret_number = rand::thread_rng().gen_range(1..=100);
-    // let secret_number:u32 = 5;
-    println!("Your secret number is {secret_number}");
+    const MY_TYPE: u32 = 23 * 18;
+    println!("Your const number is {MY_TYPE}");
+    let x = 23;
 
-    loop {
-        println!("Guess a number:");
-        let mut guess = String::new();
-
-        io::stdin()
-            .read_line(&mut guess)
-            .expect("Failed to read line");
-        let guess: u32 = match guess.trim().parse() {
-            Ok(num) => num,
-            Err(_) => continue,
-        };
-
-        match guess.cmp(&secret_number) {
-            Ordering::Less => println!("Too Small"),
-            Ordering::Greater => println!("Too big"),
-            Ordering::Equal => {
-                println!("You win");
-                break;
-            }
-        }
+    {
+        let x = x + 23;
+        println!("x is {x}");
     }
+    println!("x final is {x}");
 
-    println!("EOP!");
+    // Data types:
+    // Integer types:
+    // u8, i8, 16, 32,64,128
+    // Floating tyoes
+    // f32
+    // Bool
+    // bool
+    // Character
+    // char
+
+    // Compound types -> arrays and tuples
+
+    // let tup = (500, 6.4, 1);
+    // let (a, b, c) = tup;
+
+    let tup: (u32, f64, u8) = (500, 6.4, 1);
+    let (a, _b, _c) = tup;
+
+    // let me = tup.0 -> arraylike
+    println!("Value of a is {a}");
+
+    // Arrays
+    // let a = [1,2,3,4,5];
+    // let a = [3; 5] -> 3 five times
+    let a: [i32; 5] = [1, 2, 3, 4, 5];
+    let accessed = a[4];
+    println!("Array is {accessed}")
 }
