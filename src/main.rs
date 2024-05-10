@@ -1,39 +1,80 @@
+use std::cmp::Ordering;
+
 fn main() {
-    const MY_TYPE: u32 = 23 * 18;
-    println!("Your const number is {MY_TYPE}");
-    let x = 23;
+    let number: i32 = 32;
 
-    {
-        let x = x + 23;
-        println!("x is {x}");
+    if number < 5 {
+        println!("less than");
+    } else {
+        println!("greater than");
     }
-    println!("x final is {x}");
 
-    // Data types:
-    // Integer types:
-    // u8, i8, 16, 32,64,128
-    // Floating tyoes
-    // f32
-    // Bool
-    // bool
-    // Character
-    // char
+    let condition = false;
+    let num = if condition { 8 } else { 10 };
 
-    // Compound types -> arrays and tuples
+    println!("nums is {num}");
 
-    // let tup = (500, 6.4, 1);
-    // let (a, b, c) = tup;
+    match number.cmp(&33) {
+        Ordering::Less => println!("less than"),
+        Ordering::Greater => println!("greater than"),
+        Ordering::Equal => println!("equal"),
+    }
 
-    let tup: (u32, f64, u8) = (500, 6.4, 1);
-    let (a, _b, _c) = tup;
+    let mut counter = 0;
+    let result = loop {
+        counter += 1;
+        println!("Loops");
+        if counter == 3 {
+            break counter * 2;
+        }
+    };
 
-    // let me = tup.0 -> arraylike
-    println!("Value of a is {a}");
+    println!("counter is {result}");
 
-    // Arrays
-    // let a = [1,2,3,4,5];
-    // let a = [3; 5] -> 3 five times
-    let a: [i32; 5] = [1, 2, 3, 4, 5];
-    let accessed = a[4];
-    println!("Array is {accessed}")
+    me_loop();
+    me_array();
+    me_rev();
+    abs_loop();
+}
+
+fn me_loop() {
+    let mut number: u32 = 5;
+    while number != 0 {
+        println!("me number is {number}");
+        number -= 1;
+    }
+}
+
+fn me_array() {
+    let a = [12, 13, 14, 15];
+    for element in a {
+        println!("value of a is {element}");
+    }
+}
+
+fn me_rev() {
+    for number in (1..4).rev() {
+        println!("reverse number is {number}");
+    }
+}
+
+fn abs_loop() {
+    let mut count = 0;
+    'counting_up: loop {
+        println!("count = {count}");
+        let mut remaining = 10;
+
+        loop {
+            println!("remaining = {remaining}");
+            if remaining == 9 {
+                break;
+            }
+            if count == 2 {
+                break 'counting_up;
+            }
+            remaining -= 1;
+        }
+
+        count += 1;
+    }
 }
